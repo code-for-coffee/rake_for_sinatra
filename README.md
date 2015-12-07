@@ -1,6 +1,14 @@
 ## Rake for Sinatra
 A guide to using Rake tasks with Sinatra.
 
+#### Why Rake?
+
+* Rake allows you to create tasks in Ruby.
+* Such as creating a database, adding some tables, and dropping it.
+* You can also use rake to do many other things.
+
+#### Getting Started
+
 1. Build a Gemfile. Include the `rake` and `sinatra-activerecord` gems in your `Gemfile`. Then, `bundle`.
 2. Let's create a simple app. This can work for any application, though. Create an `app.rb` with:
     * `ActiveRecord::Base.establish_connection()`
