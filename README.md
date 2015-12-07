@@ -1,5 +1,5 @@
-# rake_for_sinatra
-Because being lazy is awesome!
+# Rake for Sinatra
+A guide to using Rake tasks with Sinatra.
 
 1. Build a Gemfile. Include the `rake` and `sinatra-activerecord` gems in your `Gemfile`. Then, `bundle`.
 2. Let's create a simple app. This can work for any application, though. Create an `app.rb` with:
