@@ -35,12 +35,12 @@ A guide to using Rake tasks with Sinatra.
 14. Let's open our newly created migration file. It should contain a `change` method. Notice the use of Ruby? Let's add a column to our table:
    ```ruby
    class CreateAccounts < ActiveRecord::Migration
-   def change
-     create_table :accounts do |t|
-       t.string :name
-       t.text :password_hash
-     end
-   end
+      def change
+        create_table :accounts do |t|
+          t.string :name
+          t.text :password_hash
+        end
+      end
    end
     ```
 15. Our `:primary_key` will automatically be defined for us, by the way!
