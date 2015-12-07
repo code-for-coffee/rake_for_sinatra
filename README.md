@@ -17,7 +17,7 @@ A guide to using Rake tasks with Sinatra.
 5. Create a folder called `config` and create `config/database.yml` too store your database information. A template is provided below to get you started.
 6. Let's describe what a **task** is. What do you think it is? Is a task something you need to knock out?
 7. In your `Rakefile`, we need to create a task to `load_config`...
-    ```ruby
+   ```ruby
     require "sinatra/activerecord/rake"
     
     namespace :db do
