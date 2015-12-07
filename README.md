@@ -33,15 +33,15 @@ A guide to using Rake tasks with Sinatra.
 12. Let's create some relations! We'll build our first table: `bundle exec rake db:create_migration NAME=create_accounts`
 13. We're creating a **migration** and giving it a *task name*. The migration will be found in `./db/migrate`.
 14. Let's open our newly created migration file. It should contain a `change` method. Notice the use of Ruby? Let's add a column to our table:
-    ```ruby
-    class CreateAccounts < ActiveRecord::Migration
-      def change
-        create_table :accounts do |t|
-          t.string :name
-          t.text :password_hash
-        end
-      end
-    end
+   ```ruby
+   class CreateAccounts < ActiveRecord::Migration
+   def change
+     create_table :accounts do |t|
+       t.string :name
+       t.text :password_hash
+     end
+   end
+   end
     ```
 15. Our `:primary_key` will automatically be defined for us, by the way!
 16. Now, let's actually create our database tables... `bundle exec rake db:migrate`
