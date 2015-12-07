@@ -42,7 +42,7 @@ A guide to using Rake tasks with Sinatra.
         end
       end
    end
-    ```
+   ```
 15. Our `:primary_key` will automatically be defined for us, by the way!
 16. Now, let's actually create our database tables... `bundle exec rake db:migrate`
 17. You should notice some awesomeness: you'll be alerted that things went well with how long they took!
