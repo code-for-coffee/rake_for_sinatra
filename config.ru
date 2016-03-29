@@ -12,10 +12,11 @@ env_config  = full_config[ENV['RACK_ENV']] || {}
 AppConfig    = OpenStruct.new(env_config)
 
 ## ActiveRecord
+
+DB_URI = ENV['DATABASE_URL'] || AppConfig["database"]
 DB = ActiveRecord::Base.establish_connection(
-  ENV['DATABASE_URL'] ||
   :adapter => AppConfig["adapter"],
-  :database => AppConfig["database"]
+  :database => DB_URI
 )
 
 ## Sequel gem
