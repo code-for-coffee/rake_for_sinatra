@@ -7,28 +7,40 @@ A guide to using Rake tasks with Sinatra.
 * Such as creating a database, adding some tables, and dropping it.
 * You can also use rake to do many other things.
 
+#### db Tasks
+
+This boilerplate acknolwedges the `RACK_ENV` environment variable.
+- It uses `sqlite3` for the `development` (default) environment.
+- It uses `postgresql` for the `test` and `production` environments.
+- These can be specified using `RACK_ENV="production" bundle exec rake db:create` or `bundle exec rake db:create`
+- To migrate: `RACK_ENV="production" bundle exec rake db:migrate`
+- To drop: `RACK_ENV="production" bundle exec rake db:drop`
+
+
 #### Getting Started
 
 1. Build a Gemfile. Include the `rake` and `sinatra-activerecord` gems in your `Gemfile`. Then, `bundle`.
-2. Let's create a simple app. This can work for any application, though. Create an `app.rb` with:
-    * `ActiveRecord::Base.establish_connection()`
-3. Let's build a `config.ru` to `require('./app')` & `run Sinatra::Application`
+2. Let's create a simple app. We've provided an `app.rb` with a `models/account.rb`.
+3. Let's build a `config.ru` to `require('./app')` & `run Sinatra::Application`.
 4. Create a new file: `Rakefile`. This is where we are going to store our tasks.
 5. Create a folder called `config` and create `config/database.yml` too store your database information. A template is provided below to get you started.
 6. Let's describe what a **task** is. What do you think it is? Is a task something you need to knock out?
 7. In your `Rakefile`, we need to create a task to `load_config`...
    ```ruby
     require "sinatra/activerecord/rake"
-    
+
     namespace :db do
       task :load_config do
-        require "./app"
+        #your code here
+      end
+      task :create do
+        #create db code
       end
     end
     ```
 8. Let's test and see if this works in our **Terminal**: `bundle exec rake -T`
 9. It this ran correctly, we can now automatically create **all** of our databases! Let's do that by running `bundle exec rake db:create`.
-10. Open `psql` and `\connect` to the database you have specified in your `app.rb`.
+10. Open `psql` and `\connect` to the database you have specified in your `database.yml`.
 11. List out relations with `\dt`. What do you see? Nothing?
 12. Let's create some relations! We'll build our first table: `bundle exec rake db:create_migration NAME=create_accounts`
 13. We're creating a **migration** and giving it a *task name*. The migration will be found in `./db/migrate`.
@@ -45,46 +57,42 @@ A guide to using Rake tasks with Sinatra.
 #### database.yml Example with Postgresql
 
 ```yaml
-
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: rake_101_dev
-  pool: 5
-  username: codeforcoffee
-  password:
+  adapter: sqlite3
+  database: ./db/sinatra_rake_boilerplate_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: rake_101_test
-  pool: 5
-  username: codeforcoffee
-  password:
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: rake_101
+  database: sinatra_rake_boilerplate_prod
   pool: 5
   username: codeforcoffee
   password:
 
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: sinatra_rake_boilerplate_test
+  pool: 5
+  username: codeforcoffee
+  password:
 ```
 
 #### Migrations Example
 
 ```ruby
 class CreateAccounts < ActiveRecord::Migration
-   def change
-     create_table :accounts do |t|
+  def change
+    create_table :accounts do |t|
        t.string :name
        t.text :password_hash
+       t.string :email
      end
-   end
+  end
 end
 ```
 
