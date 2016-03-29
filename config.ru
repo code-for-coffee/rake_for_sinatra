@@ -14,10 +14,7 @@ AppConfig    = OpenStruct.new(env_config)
 ## ActiveRecord
 
 DB_URI = ENV['DATABASE_URL'] || AppConfig["database"]
-DB = ActiveRecord::Base.establish_connection(
-  :adapter => AppConfig["adapter"],
-  :database => DB_URI
-)
+DB = ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
 
 ## Sequel gem
 # Connect to the database
