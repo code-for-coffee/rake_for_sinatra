@@ -6,4 +6,6 @@ Account.create({
   :email => 'test@heyya.outkast'
 }).save
 
-p Account.all
+get '/' do
+  Account.all.to_json
+end
