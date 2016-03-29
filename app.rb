@@ -1,7 +1,9 @@
-require('bundler')
-Bundler.require
+require './models/account'
 
-ActiveRecord::Base.establish_connection(
-  :adapter => 'postgresql',
-  :database => 'rake_101_dev'
-)
+Account.create({
+  :name => 'Testy',
+  :password_hash => BCrypt::Password.create('ajsajflsfjfljsffljsadlfj'),
+  :email => 'test@heyya.outkast'
+}).save
+
+p Account.all
