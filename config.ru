@@ -14,8 +14,10 @@ AppConfig    = OpenStruct.new(env_config)
 ## ActiveRecord
 
 if ENV['DATABASE_URL']
+  Bundler.require(:production)
   DB = ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
 else
+  Bundler.require(:development)
   DB = ActiveRecord::Base.establish_connection(
     :adapter => AppConfig["adapter"],
     :database => AppConfig["database"]
