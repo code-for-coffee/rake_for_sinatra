@@ -14,8 +14,10 @@ AppConfig    = OpenStruct.new(env_config)
 ## ActiveRecord
 
 if ENV['DATABASE_URL']
+  Bundler.require(:production)
   DB = ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
 else
+  Bundler.require(:development)
   DB = ActiveRecord::Base.establish_connection(
     :adapter => AppConfig["adapter"],
     :database => AppConfig["database"]
@@ -23,12 +25,13 @@ else
 end
 
 ## Sequel gem
-# Connect to the database
-# db_config = AppConfig.database
-# DB = if ENV['RACK_ENV'] == 'production'
-#   Sequel.connect(adapter: db_config['adapter'], user: db_config['user'], host: db_config['host'], database: db_config['name'], password: db_config['password'])
+# heroku provides a ENV var called ENV['DATABASE_URL']
+# if ENV['DATABASE_URL']
+# Bundler.require(:default, :production)
+# DB = Sequel.connect(ENV['DATABASE_URL'])
 # else
-#   Sequel.sqlite(db_config['name'])
+# Bundler.require(:default, :development)
+# DB = Sequel.sqlite('development.sqlite')
 # end
 
 require './app'
